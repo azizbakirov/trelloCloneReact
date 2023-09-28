@@ -1,2 +1,13 @@
 1. File strukture 
-2. 
+2. Style Versatka {
+    1. Header 
+    2. Navbar{
+        1. Menu
+        2. Account
+        3. Create
+        4. Templates
+    }
+    3. Footer
+    4. Task
+    7.
+}
