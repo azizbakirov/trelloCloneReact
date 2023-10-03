@@ -1,0 +1,298 @@
+.task {
+  .bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    display: flex;
+
+    .task_item {
+      width: 270px;
+      height: 100%;
+      backdrop-filter: blur(5px);
+      background-color: #171a1df8;
+
+      .task_board {
+        padding: 12px 18px;
+        position: fixed;
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #9fadbc34;
+
+        .board {
+          display: flex;
+          gap: 8px;
+          align-items: center;
+
+          .letter {
+            padding: 5px 10px;
+            background: rgb(87, 157, 255);
+            background: linear-gradient(
+              150deg,
+              rgba(87, 157, 255, 1) 0%,
+              rgba(150, 237, 255, 1) 100%
+            );
+            color: #1d2125;
+            font-weight: bold;
+            font-size: 18px;
+            border-radius: 4px;
+          }
+          p {
+            font-weight: 500;
+            font-size: 14px;
+            width: 50%;
+            flex-direction: column;
+
+            span {
+              font-size: 12px;
+              font-weight: 400;
+            }
+          }
+        }
+        .board_left_icon {
+          position: relative;
+          background-color: #1315182a;
+          padding: 9px 12px;
+          border-radius: 5px;
+          font-size: 10px;
+          cursor: pointer;
+        }
+        .board_left_icon:hover {
+          background-color: #282d31;
+        }
+      }
+      .board_menu {
+        position: relative;
+        top: 90px;
+        overflow: scroll;
+        overflow-x: hidden;
+
+        .menu {
+          display: flex;
+          // align-items: center;
+          flex-direction: column;
+          justify-content: space-between;
+          width: 100%;
+
+          button {
+            display: flex;
+            padding: 5px 18px;
+            align-items: center;
+            justify-content: space-between;
+            height: 40px;
+            text-align: left;
+            border: none;
+            background-color: transparent;
+            color: #9fadbc;
+            cursor: pointer;
+            font-weight: 600;
+
+            div {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 12px;
+            }
+          }
+          button:hover {
+            background-color: #282d31;
+          }
+        }
+        .tab_menu {
+          margin-top: 10px;
+          display: flex;
+          flex-direction: column;
+
+          p {
+            padding: 12px 18px;
+
+            font-size: 14px;
+          }
+
+          button {
+            padding: 8px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: transparent;
+            color: #9fadbc;
+            border: none;
+            cursor: pointer;
+
+            div {
+              display: flex;
+              align-items: center;
+              gap: 7px;
+              span {
+                font-style: italic;
+              }
+            }
+          }
+          button:hover {
+            background-color: #282d31;
+          }
+        }
+        .my_board {
+          .my_board_title {
+            padding: 12px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 15px;
+            margin-top: 6px;
+
+            .add_meu {
+              display: flex;
+              gap: 15px;
+              cursor: pointer;
+              font-size: 12px;
+            }
+          }
+          .my_board_edit {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #3c4247;
+            padding: 5px 18px;
+            cursor: pointer;
+
+            .editon {
+              display: flex;
+              align-items: center;
+              gap: 5px;
+              font-size: 13px;
+              img {
+                padding: 2px;
+                width: 30px;
+                height: 30px;
+                object-fit: cover;
+                border-radius: 5px;
+              }
+            }
+            .icon {
+              display: flex;
+              align-items: center;
+              gap: 10px;
+              font-size: 12px;
+            }
+          }
+          .my_board_edit:hover {
+            background-color: #282d31;
+          }
+        }
+      }
+    }
+
+    .edit_task {
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #1d21253f;
+        backdrop-filter: blur(5px);
+        width: 600px;
+        padding: 8px 10px ;
+
+        .nav_left {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+
+          p {
+            font-size: 18px;
+            font-weight: bold;
+            padding: 4px 7px;
+            cursor: pointer;
+            border-radius: 5px;
+          }
+          p:hover {
+            background-color: #878f9742;
+            backdrop-filter: blur(5px);
+          }
+
+          .btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+
+            .board_btn{
+              padding: 7px 15px;
+              display: flex;
+              align-items: center;
+              background-color: #bec4ca;
+              color: #1d2125;
+              gap: 5px;
+            }
+            .board_btn:hover{
+              background-color: #bec4cac4;
+            }
+
+            button {
+              border: none;
+              background-color: transparent ;
+              border-radius: 5px;
+              color: #9fadbc;
+              padding: 7px 11px;
+              cursor: pointer;
+            }
+            button:hover {
+              background-color: #878f9742;
+              backdrop-filter: blur(5px);
+            }
+          }
+        }
+        .nav_right {
+          display: flex;
+          align-items: center;
+          .account {
+            border-radius: 50%;
+            padding: 7px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            img {
+              border-radius: 50%;
+              width: 28px;
+            }
+          }
+          .account:hover {
+            background-color: #a1bdd914;
+          }
+        }
+
+          button {
+              border: none;
+              background-color: transparent ;
+              border-radius: 5px;
+              color: #9fadbc;
+              padding: 7px 11px;
+              cursor: pointer;
+            }
+            button:hover {
+              background-color: #878f9742;
+              backdrop-filter: blur(5px);
+            }
+      }
+    }
+  }
+}
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #1d2125;
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #a1bdd914;
+  border-radius: 5px;
+}

@@ -1,14 +1,13 @@
 .content {
   margin: 55px auto;
-  width: 80%;
+  justify-content: center;
   display: flex;
-  gap: 55px;
+  gap: 50px;
 
   .menu {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 250px;
 
     .btn {
       padding: 8px 15px;
@@ -19,6 +18,7 @@
       font-weight: 500;
       font-size: 14px;
       cursor: pointer;
+      width: 270px;
     }
     .btn:hover {
       background-color: #a1bdd914;
@@ -92,6 +92,17 @@
       }
     }
   }
+  .news{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    width: 400px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.13);
+    border-bottom: 3px solid rgba(0, 0, 0, 0.459);
+    // background-color: #092957;
+  }
   .recently {
     .recent {
       display: flex;
@@ -108,7 +119,7 @@
       margin-top: 20px;
       padding: 10px;
       border-radius: 5px;
-      width: 380px;
+      width: 330px;
       transition: all 0.3s;
       cursor: pointer;
       .recent_img {

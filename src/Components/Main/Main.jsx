@@ -2,7 +2,11 @@ import React from "react";
 import style from "./Main.module.scss";
 import { Walpeper } from "../../Assets";
 
-function Main() {
+function Main({toggleBtn}) {
+
+  // toggle add btn
+  
+
   return (
     <main className="container">
       <div className={style.content}>
@@ -36,6 +40,9 @@ function Main() {
             </div>
           </div>
         </div>
+
+        <div className={style.news}>Not Found</div>
+
         <div className={style.recently}>
           <div className={style.recent}>
             <i className="fa-regular fa-clock"></i>
@@ -52,7 +59,7 @@ function Main() {
           </div>
           <div className={style.create_task}>
             <p className={style.task_url}>Ссылки</p>
-            <div className={style.create}>
+            <div className={style.create} onClick={toggleBtn}>
               <p className={style.task_icon}>
                 <i className="fa-regular fa-plus"></i>
               </p>

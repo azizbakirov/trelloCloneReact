@@ -9,3 +9,6 @@ export {default as Account} from "./Images/img.jpg"
 
 // Walpaper
 export {default as Walpeper} from "./Images/walpaper.jpg"
+
+// grid icon wrapper
+export {default as Grids} from "./Svg/grid.png"
