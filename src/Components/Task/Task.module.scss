@@ -9,7 +9,7 @@
     display: flex;
 
     .task_item {
-      width: 270px;
+      width: 320px;
       height: 100%;
       backdrop-filter: blur(5px);
       background-color: #171a1df8;
@@ -187,14 +187,15 @@
     }
 
     .edit_task {
+      width: 100%;
       .nav {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: #1d21253f;
-        backdrop-filter: blur(5px);
-        width: 600px;
-        padding: 8px 10px ;
+        background-color: #1d212556;
+        backdrop-filter: blur(3px);
+        padding: 6px 10px;
+        color: white;
 
         .nav_left {
           display: flex;
@@ -218,23 +219,23 @@
             align-items: center;
             gap: 5px;
 
-            .board_btn{
+            .board_btn {
               padding: 7px 15px;
               display: flex;
               align-items: center;
-              background-color: #bec4ca;
+              background-color: #ffffffd5;
               color: #1d2125;
               gap: 5px;
             }
-            .board_btn:hover{
-              background-color: #bec4cac4;
+            .board_btn:hover {
+              background-color: #fff;
             }
 
             button {
               border: none;
-              background-color: transparent ;
+              background-color: transparent;
               border-radius: 5px;
-              color: #9fadbc;
+              color: #fff;
               padding: 7px 11px;
               cursor: pointer;
             }
@@ -247,36 +248,72 @@
         .nav_right {
           display: flex;
           align-items: center;
-          .account {
-            border-radius: 50%;
-            padding: 7px;
+          .acc_items {
             display: flex;
-            justify-content: center;
             align-items: center;
-            transition: all 0.3s;
-            cursor: pointer;
-            img {
+            gap: 8px;
+
+
+
+            .account {
               border-radius: 50%;
-              width: 28px;
+              padding: 7px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              transition: all 0.3s;
+              cursor: pointer;
+              img {
+                border-radius: 50%;
+                width: 28px;
+              }
             }
-          }
-          .account:hover {
-            background-color: #a1bdd914;
+            .account:hover {
+              background-color: #a1bdd914;
+            }
+
+          
+            .btn_send{
+              background-color: #ffffffd5;
+              color:#1d2125;
+              display: flex;
+              align-items: center;
+              font-weight: 600;
+              gap: 5px;
+            }
+            .btn_send:hover{
+              background-color: white;
+            }
+            .menu{
+              font-size: 15px;
+            }
+
+
           }
         }
 
-          button {
-              border: none;
-              background-color: transparent ;
-              border-radius: 5px;
-              color: #9fadbc;
-              padding: 7px 11px;
-              cursor: pointer;
-            }
-            button:hover {
-              background-color: #878f9742;
-              backdrop-filter: blur(5px);
-            }
+        button {
+          border: none;
+          background-color: transparent;
+          border-radius: 5px;
+          color: white;
+          padding: 7px 11px;
+          cursor: pointer;
+        }
+        .filter_btn{
+          display: flex;
+          align-items: center;
+          gap: 5px;
+        }
+        button:hover {
+          background-color: #878f9742;
+          backdrop-filter: blur(5px);
+        }
+      }
+      .tasks{
+        display: flex;
+        align-items: center;
+        padding: 10px 15px;
       }
     }
   }

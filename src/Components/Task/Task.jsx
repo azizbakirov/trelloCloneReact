@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./Task.module.scss";
 import { Walpeper, Account } from "../../Assets/index";
+import New_task from "./New_Task/New_task";
 
 function Task() {
   return (
@@ -15,7 +16,7 @@ function Task() {
               </p>
             </div>
             <div className={style.board_left_icon}>
-              <i class="fa-solid fa-chevron-left"></i>
+              <i className="fa-solid fa-chevron-left"></i>
             </div>
           </div>
           <div className={style.board_menu}>
@@ -41,7 +42,7 @@ function Task() {
                   <span>Настройки рабочего пространства</span>
                 </div>
                 <div>
-                  <i class="fa-solid fa-chevron-down"></i>
+                  <i className="fa-solid fa-chevron-down"></i>
                 </div>
               </button>
             </div>
@@ -54,7 +55,7 @@ function Task() {
                   <span>Таблица</span>
                 </div>
                 <div className={style.menu_icon}>
-                  <i class="fa-solid fa-ellipsis"></i>
+                  <i className="fa-solid fa-ellipsis"></i>
                 </div>
               </button>
 
@@ -64,7 +65,7 @@ function Task() {
                   <span>Календарь</span>
                 </div>
                 <div className={style.menu_icon}>
-                  <i class="fa-solid fa-ellipsis"></i>
+                  <i className="fa-solid fa-ellipsis"></i>
                 </div>
               </button>
             </div>
@@ -72,8 +73,8 @@ function Task() {
               <div className={style.my_board_title}>
                 <p>Мои доски </p>
                 <div className={style.add_meu}>
-                  <i class="fa-solid fa-ellipsis"></i>
-                  <i class="fa-solid fa-plus"></i>
+                  <i className="fa-solid fa-ellipsis"></i>
+                  <i className="fa-solid fa-plus"></i>
                 </div>
               </div>
               <div className={style.my_board_edit}>
@@ -82,8 +83,8 @@ function Task() {
                   <span>My board</span>
                 </div>
                 <div className={style.icon}>
-                  <i class="fa-solid fa-ellipsis"></i>
-                  <i class="fa-solid fa-star"></i>
+                  <i className="fa-solid fa-ellipsis"></i>
+                  <i className="fa-solid fa-star"></i>
                 </div>
               </div>
             </div>
@@ -106,7 +107,7 @@ function Task() {
                   <span>По доске</span>
                 </button>
                 <button>
-                  <i class="fa-solid fa-chevron-down"></i>
+                  <i className="fa-solid fa-chevron-down"></i>
                 </button>
               </div>
             </div>
@@ -117,16 +118,27 @@ function Task() {
               <button>
                 <i className="fa-solid fa-bolt"></i>
               </button>
-              <div className={style.filter_btn}>
-                <button>
-                  <i class="fa-solid fa-filter"></i>
-                  <span>Фильтр</span>
+              <button className={style.filter_btn}>
+                <i className="fa-solid fa-filter"></i>
+                <span>Фильтр</span>
+              </button>
+              <div className={style.acc_items}>
+                <div className={style.account}>
+                  <img src={Account} alt="" />
+                </div>
+                <button className={style.btn_send}>
+                  <i className="fa-solid fa-user-plus"></i>
+                  <span>Поделиться</span>
+                </button>
+                <button className={style.menu}>
+                  <i className="fa-solid fa-ellipsis"></i>
                 </button>
               </div>
-              <div className={style.account}>
-                <img src={Account} alt="" />
-              </div>
             </div>
+          </div>
+
+          <div className={style.tasks}>
+            <New_task />
           </div>
         </div>
       </div>

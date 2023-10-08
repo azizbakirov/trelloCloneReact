@@ -36,7 +36,7 @@ function Main({toggleBtn}) {
                 <div className={style.letter}>A</div>
                 <p>Aziz: рабочее пространство</p>
               </div>
-              <i class="fa-solid fa-chevron-down"></i>
+              <i className="fa-solid fa-chevron-down"></i>
             </div>
           </div>
         </div>
