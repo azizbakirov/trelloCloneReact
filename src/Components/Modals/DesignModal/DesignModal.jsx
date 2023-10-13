@@ -1,41 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import style from "./modal.module.scss"
 import {Walpeper} from "../../../Assets"
+import { useSelector } from 'react-redux';
 
-function DesignModal() {
+function DesignModal({ setToggle, setPage }) {
+  const unsplash_data = useSelector((state) => state.api.value);
+
   return (
     <div className={style.modal}>
       <div className={style.title_close}>
         <div></div>
         <p>Фон доски</p>
-        <i className="fa-solid fa-xmark"></i>
+        <i onClick={() => setToggle(false)} className="fa-solid fa-xmark"></i>
       </div>
 
       <div className={style.bg}>
         <div className={style.title}>
           <p>Фотографии</p>
-          <button className={style.template}>Подробнее</button>
+          <button onClick={() => setPage(10)} className={style.template}>
+            Подробнее
+          </button>
         </div>
         <div className={style.bg_wrapper}>
           <div className={style.grid_img}>
-            <div>
-              <img src={Walpeper} alt="" />
-            </div>
-            <div>
-              <img src={Walpeper} alt="" />
-            </div>
-            <div>
-              <img src={Walpeper} alt="" />
-            </div>
-            <div>
-              <img src={Walpeper} alt="" />
-            </div>
-            <div>
-              <img src={Walpeper} alt="" />
-            </div>
-            <div>
-              <img src={Walpeper} alt="" />
-            </div>
+            {unsplash_data.photos.map((data) => (
+              <div>
+                <img src={data.urls.small} alt="" />
+              </div>
+            ))}
           </div>
         </div>
         <div className={style.bg_color}>

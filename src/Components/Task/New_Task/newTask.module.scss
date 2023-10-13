@@ -2,10 +2,12 @@
   width: 272px;
   background-color: #101204;
   border-radius: 12px;
+  height: 100%;
 
   .container {
     width: 90%;
     margin: 10px auto;
+
 
     .list_title {
       font-weight: 600;
@@ -45,20 +47,23 @@
 
     .text {
       position: relative;
-      height: 380px;
       overflow: scroll;
       overflow-x: hidden;
-      // margin-top: 18px   ;
-      padding: 0 6px 0 0;
+      // margin-top: 18px;
+        // height: 60vh;
+        height: auto;
 
+      padding: 0 6px 0 0;
+      
       .task_item {
         display: flex;
-        margin-top: 15px;
+        margin-top: 10px;
+        // height: 100%;
         
         textarea{
           width: 100%;
           cursor: pointer;
-          padding: 8px 8px;
+          padding: 10px 8px;
           resize: none;
           outline: none;
           background-color: #22272b;
@@ -72,7 +77,8 @@
           cursor: pointer;
           position: absolute;
           padding: 5px;
-          top: 6px;
+          // top: 18px;
+          margin-top: 5px;
           font-size: 14px;
           border-radius: 5px;
           left: 200px;

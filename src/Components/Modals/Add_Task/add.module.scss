@@ -88,12 +88,23 @@
       justify-content: space-between;
 
       img {
-        border-radius: 4px;
         width: 60px;
+        height: 40px;
         cursor: pointer;
+        object-fit: cover;
+        border-radius: 4px;
       }
       img:hover {
         filter: contrast(70%);
+      }
+      i{
+        position: relative;
+        bottom: 30px;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        color: #1d2125;
+        font-size: 14px;
       }
     }
     .bg_color {

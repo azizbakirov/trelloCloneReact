@@ -1,13 +1,13 @@
 import React from "react";
 import style from "./Main.module.scss";
 import { Walpeper } from "../../Assets";
+import { useDispatch } from "react-redux";
 
-function Main({toggleBtn}) {
-
+function Main({ openModal }) {
   // toggle add btn
-  
 
-  return (
+
+    return (
     <main className="container">
       <div className={style.content}>
         <div className={style.menu}>
@@ -59,7 +59,7 @@ function Main({toggleBtn}) {
           </div>
           <div className={style.create_task}>
             <p className={style.task_url}>Ссылки</p>
-            <div className={style.create} onClick={toggleBtn}>
+            <div className={style.create} onClick={openModal}>
               <p className={style.task_icon}>
                 <i className="fa-regular fa-plus"></i>
               </p>

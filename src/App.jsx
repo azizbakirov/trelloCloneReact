@@ -1,32 +1,61 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./Components/Header/Header";
 import Main from "./Components/Main/Main";
 import Add_task from "./Components/Modals/Add_Task/Add_task";
 import Task from "./Components/Task/Task";
+import { useDispatch, useSelector } from "react-redux";
+import { setUnsplashApi } from "./Context/store/Unsplash/UnsplashApi";
+import { getPhotosApi } from "./API/Unsplash";
 
 function App() {
-  // State toggle
-  const [toggle, setToggle] = useState(false)
+  const taskValue = useSelector((state) => state.data.value);
+  const dispatch = useDispatch();
 
+  // State toggle
+  const [toggle, setToggle] = useState(true);
+  const [openTaskModal, setOpenTaskModal] = useState(false);
+  const [page, setPage] = useState(6);
+
+  console.log(page);
+
+
+
+  useEffect(() => {
+    getPhotosApi("natuer", page).then((data) => {
+      dispatch(
+        setUnsplashApi({
+          photos: data.data.results,
+        }),
+      );
+      console.log(data.data.results);
+    });
+  }, []);
 
   // toggle function
   const toggleBtn = () => {
-      setToggle(!toggle)
-  }
-
+    setToggle(!toggle);
+  };
+  const openModal = (e) => {
+    setOpenTaskModal(!openTaskModal);
+  };
 
   return (
     <div>
-      <div className="modals" >
-       {toggle ?  <Add_task toggleBtn={toggleBtn} /> : ""}
+      <div className="modals">
+        {openTaskModal ? (
+          <Add_task openModal={openModal} setPage={setPage} />
+        ) : (
+          ""
+        )}
       </div>
-       
+
       {/* Header and navbar */}
       <Header />
+      {/* <Task /> */}
 
       {/* Main and home */}
-     {toggle ?  <Main toggleBtn={toggleBtn} /> : <Task />}
+      <Main openModal={openModal} />
     </div>
   );
 }

@@ -2,33 +2,50 @@ import React, { useState } from "react";
 import style from "./add.module.scss";
 import { Walpeper, Grids } from "../../../Assets";
 import DesignModal from "../DesignModal/DesignModal";
+import { useDispatch, useSelector } from "react-redux";
+import { setTaskValue } from "../../../Context/store/TaskAddValue/TaskAddValueSlice";
 
-function Add_task({toggleBtn}) {
-
-  const [toggle, setToggle] = useState(false)
+function Add_task({ openModal, setPage }) {
+  const data_UNSPLASH_IMG = useSelector((state) => state.api.value);
+  const [toggle, setToggle] = useState(false);
+  const dispatch = useDispatch();
 
   function parrentClick(e) {
-    toggleBtn()
+    openModal();
   }
-  function child (e) {
-    console.log(e);
-    console.log(e.stopPropagation());
+  function child(e) {
+    e.stopPropagation();
+  }
 
-  }
+  const handleSubmitValue = (e) => {
+    e.preventDefault();
+    dispatch(
+      setTaskValue({
+        nameTask: e.target[0].value,
+        typeTask: e.target[1].value,
+      }),
+    );
+    console.log(e.target[1].value);
+    e.target[0].value = "";
+  };
 
   return (
     <div>
-      {toggle ? <DesignModal /> : ""}
+      {toggle ? <DesignModal setPage={setPage} setToggle={setToggle} /> : ""}
       <div className={style.modals} onClick={parrentClick}>
         <div className={style.modal} onClick={child}>
           <div className={style.title_close}>
             <div></div>
             <p>Создать доску</p>
-            <i onClick={toggleBtn} className="fa-solid fa-xmark"></i>
+            <i onClick={openModal} className="fa-solid fa-xmark"></i>
           </div>
           <div className={style.info}>
             <div className={style.image}>
-              <img className={style.img} src={Walpeper} alt="" />
+              <img
+                className={style.img}
+                src={data_UNSPLASH_IMG.photos[0].urls.small}
+                alt=""
+              />
             </div>
             <div className={style.grid}>
               <div>
@@ -41,16 +58,17 @@ function Add_task({toggleBtn}) {
             <p>Фон</p>
             <div className={style.bg_wrapper}>
               <div className="bg_1">
-                <img src={Walpeper} alt="1" />
+                <img src={data_UNSPLASH_IMG.photos[0].urls.small} alt="1" />
               </div>
               <div className="bg_1">
-                <img src={Walpeper} alt="1" />
+                <img src={data_UNSPLASH_IMG.photos[1].urls.small} alt="1" />
+                <i className="fa-solid fa-check"></i>
               </div>
               <div className="bg_1">
-                <img src={Walpeper} alt="1" />
+                <img src={data_UNSPLASH_IMG.photos[2].urls.small} alt="1" />
               </div>
               <div className="bg_1">
-                <img src={Walpeper} alt="1" />
+                <img src={data_UNSPLASH_IMG.photos[3].urls.small} alt="1" />
               </div>
             </div>
             <div className={style.bg_color}>
@@ -96,16 +114,16 @@ function Add_task({toggleBtn}) {
             </div>
           </div>
           <div className={style.tasks}>
-            <form action="">
+            <form action="" onSubmit={handleSubmitValue}>
               <div className={style.board}>
                 <span>Заголовок доски *</span>
-                <input type="text" />
+                <input type="text" defaultValue={""} />
                 <span>👋 Укажите название доски.</span>
               </div>
               <div className={style.select_view}>
                 <label htmlFor="">Видимость</label>
                 <select id="type">
-                  <option value="private" selected>
+                  <option defaultValue={"private"} value="private" selected>
                     Приватная
                   </option>
                   <option value="workingSpace">Рабочее пространство</option>
@@ -117,7 +135,7 @@ function Add_task({toggleBtn}) {
                 <button className={style.template}>Сделать по шаблону</button>
               </div>
               <div className={style.info_type}>
-                <div class="l4Bk0ZOo4mmgiO">
+                <div className="l4Bk0ZOo4mmgiO">
                   Используя изображения с сайта Unsplash, вы принимаете его{" "}
                   <a href="https://unsplash.com/terms" target="_blank">
                     Условия использования
