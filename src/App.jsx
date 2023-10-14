@@ -15,27 +15,21 @@ function App() {
   // State toggle
   const [toggle, setToggle] = useState(true);
   const [openTaskModal, setOpenTaskModal] = useState(false);
-  const [page, setPage] = useState(6);
-
-  console.log(page);
-
-
 
   useEffect(() => {
-    getPhotosApi("natuer", page).then((data) => {
+    getPhotosApi("mountain").then((data) => {
       dispatch(
         setUnsplashApi({
           photos: data.data.results,
         }),
       );
-      console.log(data.data.results);
     });
   }, []);
 
   // toggle function
-  const toggleBtn = () => {
-    setToggle(!toggle);
-  };
+  // const toggleBtn = () => {
+  //   setToggle(!toggle);
+  // };
   const openModal = (e) => {
     setOpenTaskModal(!openTaskModal);
   };
@@ -43,11 +37,7 @@ function App() {
   return (
     <div>
       <div className="modals">
-        {openTaskModal ? (
-          <Add_task openModal={openModal} setPage={setPage} />
-        ) : (
-          ""
-        )}
+        {openTaskModal ? <Add_task openModal={openModal} /> : ""}
       </div>
 
       {/* Header and navbar */}

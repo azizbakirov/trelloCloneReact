@@ -5,33 +5,61 @@ import DesignModal from "../DesignModal/DesignModal";
 import { useDispatch, useSelector } from "react-redux";
 import { setTaskValue } from "../../../Context/store/TaskAddValue/TaskAddValueSlice";
 
-function Add_task({ openModal, setPage }) {
+function Add_task({ openModal }) {
   const data_UNSPLASH_IMG = useSelector((state) => state.api.value);
   const [toggle, setToggle] = useState(false);
+  const [btnToggle, setBtnToggle] = useState(true);
+  const [saveImg, setSaveImg] = useState(null);
   const dispatch = useDispatch();
+
+
+  function handleSelectImg(e) {
+    setSaveImg(e.target.src);
+  }
 
   function parrentClick(e) {
     openModal();
+    e.preventDefault();
+
   }
   function child(e) {
     e.stopPropagation();
   }
 
+  const handleTypeInput = (e) => {
+    if (e.target.value.length === 0) {
+      setBtnToggle(true)
+    } else {
+      setBtnToggle(false)
+    }
+  };
+
   const handleSubmitValue = (e) => {
     e.preventDefault();
+
     dispatch(
       setTaskValue({
         nameTask: e.target[0].value,
         typeTask: e.target[1].value,
+        img: saveImg,
       }),
     );
-    console.log(e.target[1].value);
+    // console.log(e.target[1].value);
     e.target[0].value = "";
   };
 
+  const dataUnsplashImg = data_UNSPLASH_IMG?.photos.slice(0, 4);
+
   return (
     <div>
-      {toggle ? <DesignModal setPage={setPage} setToggle={setToggle} /> : ""}
+      {toggle ? (
+        <DesignModal
+          setToggle={setToggle}
+          setSaveImg={setSaveImg}
+        />
+      ) : (
+        ""
+      )}
       <div className={style.modals} onClick={parrentClick}>
         <div className={style.modal} onClick={child}>
           <div className={style.title_close}>
@@ -43,7 +71,7 @@ function Add_task({ openModal, setPage }) {
             <div className={style.image}>
               <img
                 className={style.img}
-                src={data_UNSPLASH_IMG.photos[0].urls.small}
+                src={saveImg || data_UNSPLASH_IMG.photos[0].urls.small}
                 alt=""
               />
             </div>
@@ -57,19 +85,12 @@ function Add_task({ openModal, setPage }) {
           <div className={style.bg}>
             <p>Фон</p>
             <div className={style.bg_wrapper}>
-              <div className="bg_1">
-                <img src={data_UNSPLASH_IMG.photos[0].urls.small} alt="1" />
-              </div>
-              <div className="bg_1">
-                <img src={data_UNSPLASH_IMG.photos[1].urls.small} alt="1" />
-                <i className="fa-solid fa-check"></i>
-              </div>
-              <div className="bg_1">
-                <img src={data_UNSPLASH_IMG.photos[2].urls.small} alt="1" />
-              </div>
-              <div className="bg_1">
-                <img src={data_UNSPLASH_IMG.photos[3].urls.small} alt="1" />
-              </div>
+              {dataUnsplashImg.map((data) => (
+                <div key={data.id} className="bg_1" onClick={handleSelectImg}>
+                  <img src={data.urls.small} id={data.id} />
+                  <i className="fas-fa succes"></i>
+                </div>
+              ))}
             </div>
             <div className={style.bg_color}>
               <div
@@ -117,13 +138,17 @@ function Add_task({ openModal, setPage }) {
             <form action="" onSubmit={handleSubmitValue}>
               <div className={style.board}>
                 <span>Заголовок доски *</span>
-                <input type="text" defaultValue={""} />
+                <input
+                  onChange={handleTypeInput}
+                  type="text"
+                  defaultValue={""}
+                />
                 <span>👋 Укажите название доски.</span>
               </div>
               <div className={style.select_view}>
                 <label htmlFor="">Видимость</label>
-                <select id="type">
-                  <option defaultValue={"private"} value="private" selected>
+                <select defaultValue={"private"} id="type">
+                  <option  value="private" >
                     Приватная
                   </option>
                   <option value="workingSpace">Рабочее пространство</option>
@@ -131,7 +156,12 @@ function Add_task({ openModal, setPage }) {
                 </select>
               </div>
               <div className={style.btn}>
-                <button className={style.create}>Создать</button>
+                <button
+                  disabled={btnToggle ? true : false}
+                  className={style.create}
+                >
+                  Создать
+                </button>
                 <button className={style.template}>Сделать по шаблону</button>
               </div>
               <div className={style.info_type}>
