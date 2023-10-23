@@ -22,7 +22,6 @@
     overflow: hidden;
     height: 70%;
 
-
     .title_close {
       display: flex;
       justify-content: space-between;
@@ -34,11 +33,11 @@
         font-weight: 600;
       }
       i {
-      padding: 10px 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 15px;
-    font-size: 15px;
+        padding: 10px 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 15px;
+        font-size: 15px;
       }
       i:hover {
         background-color: rgba(84, 90, 95, 0.651);

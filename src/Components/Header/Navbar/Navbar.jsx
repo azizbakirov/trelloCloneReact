@@ -2,7 +2,7 @@ import React from "react";
 import style from "./Nav.module.scss";
 import { Logo, Burger, Account } from "../../../Assets";
 
-function Navbar() {
+function Navbar({ setToggleFunc, setPageModal }) {
   return (
     <nav className={style.navbar}>
       <div className="container">
@@ -11,7 +11,7 @@ function Navbar() {
             <div className={style.burger}>
               <img src={Burger} alt="" className={style.menu} />
             </div>
-            <div className="logo">
+            <div className="logo" onClick={() => setToggleFunc(true)}>
               <img src={Logo} alt="" className={style.logo} />
             </div>
             <div className={style.pages}>
@@ -27,7 +27,7 @@ function Navbar() {
                 <span>В избранном</span>
                 <i className="fa-solid fa-chevron-down"></i>
               </button>
-              <button className={style.btn}>
+              <button className={style.btn} onClick={() => setPageModal(old => !old)}>
                 <span>Шаблоны</span>
                 <i className="fa-solid fa-chevron-down"></i>
               </button>
@@ -54,7 +54,7 @@ function Navbar() {
               </button>
             </div>
             <div className={style.account}>
-                <img src={Account} alt="" />
+              <img src={Account} alt="" />
             </div>
           </div>
         </div>

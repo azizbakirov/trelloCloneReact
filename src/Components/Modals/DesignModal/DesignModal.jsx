@@ -5,19 +5,28 @@ import { useSelector } from "react-redux";
 import SearchPhotosModal from "../SearchPhotos/SearchPhotosModal";
 import GradientColor from "../GradientColor/GradientColor";
 
-function DesignModal({ setToggle, setSaveImg }) {
+function DesignModal({
+  loading,
+  setQueryPage,
+  setToggle,
+  toggle,
+  setSaveImg,
+  handleSelectImg,
+  setSearchPhoto,
+}) {
   const unsplash_data = useSelector((state) => state.api.value);
-  const [lengthImg, setLengthImg] = useState(6);
-  const [searchPhotos, setSearchPhotos] = useState(true);
+  const [searchPhotos, setSearchPhotos] = useState("");
   const designModalTask = useRef(null);
 
-  console.log(designModalTask?.current?.style);
-
-  function handleClickImg(e) {
-    setSaveImg(e.target.src);
-    // setToggle(false);
+  function handleSelectImg(id) {
+    unsplash_data.photos.map((data) => {
+      if (data.id === id) {
+        return setSaveImg(data);
+      }
+    });
   }
-  const handleClickParrent = () => {
+
+  const handleClickParrent = (e) => {
     setToggle(false);
     e.stopPropagation();
   };
@@ -25,7 +34,7 @@ function DesignModal({ setToggle, setSaveImg }) {
     e.stopPropagation();
   };
 
-  const data_unsplashImg = unsplash_data?.photos.slice(0, lengthImg);
+  const data_unsplashImg = unsplash_data?.photos.slice(0, 6);
 
   return (
     <div onClick={handleClickParrent} className={style.modals}>
@@ -34,11 +43,11 @@ function DesignModal({ setToggle, setSaveImg }) {
         ref={designModalTask}
         onClick={handleProp}
         style={{
-          height: searchPhotos ? "" : `90%`,
-          top: searchPhotos ? "" : `60px`,
+          height: searchPhotos && `90%`,
+          top: searchPhotos && `60px`,
         }}
       >
-        {searchPhotos ? (
+        {!searchPhotos && (
           <div>
             <div className={style.title_close}>
               <div></div>
@@ -52,7 +61,7 @@ function DesignModal({ setToggle, setSaveImg }) {
               <div className={style.title}>
                 <p>Фотографии</p>
                 <button
-                  onClick={() => setSearchPhotos(false)}
+                  onClick={() => setSearchPhotos("photos")}
                   className={style.template}
                 >
                   Подробнее
@@ -61,7 +70,7 @@ function DesignModal({ setToggle, setSaveImg }) {
               <div className={style.bg_wrapper}>
                 <div className={style.grid_img}>
                   {data_unsplashImg.map((data) => (
-                    <div key={data.id} onClick={handleClickImg}>
+                    <div key={data.id} onClick={() => handleSelectImg(data.id)}>
                       <img src={data.urls.small} alt="" />
                     </div>
                   ))}
@@ -71,7 +80,7 @@ function DesignModal({ setToggle, setSaveImg }) {
                 <div className={style.title}>
                   <p>Цвета</p>
                   <button
-                    onClick={() => setSearchPhotos(false)}
+                    onClick={() => setSearchPhotos("gradient")}
                     className={style.template}
                   >
                     Подробнее
@@ -124,13 +133,23 @@ function DesignModal({ setToggle, setSaveImg }) {
               </div>
             </div>
           </div>
-        ) : <SearchPhotosModal
+        )}
+
+        {searchPhotos === "photos" && (
+          <SearchPhotosModal
+            loading={loading}
+            setQueryPage={setQueryPage}
+            setSearchPhoto={setSearchPhoto}
             setSearchPhotos={setSearchPhotos}
             setSaveImg={setSaveImg}
             setToggle={setToggle}
-            handleClickImg={handleClickImg}
-          />  }
-          {/* <GradientColor setSearchPhotos={setSearchPhotos} /> */}
+            handleSelectImg={handleSelectImg}
+          />
+        )}
+
+        {searchPhotos === "gradient" && (
+          <GradientColor setSearchPhotos={setSearchPhotos} />
+        )}
       </div>
     </div>
   );

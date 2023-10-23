@@ -4,23 +4,36 @@ import { Walpeper, Grids } from "../../../Assets";
 import DesignModal from "../DesignModal/DesignModal";
 import { useDispatch, useSelector } from "react-redux";
 import { setTaskValue } from "../../../Context/store/TaskAddValue/TaskAddValueSlice";
+import uniqid from "uniqid";
 
-function Add_task({ openModal }) {
+function Add_task({
+  loading,
+  setQueryPage,
+  openModal,
+  handleSelectImg,
+  setToggleFunc,
+  setSearchPhoto,
+}) {
   const data_UNSPLASH_IMG = useSelector((state) => state.api.value);
+  const dataTask = useSelector((state) => state.data.value);
   const [toggle, setToggle] = useState(false);
   const [btnToggle, setBtnToggle] = useState(true);
   const [saveImg, setSaveImg] = useState(null);
   const dispatch = useDispatch();
 
+  const dataUnsplashImg = data_UNSPLASH_IMG?.photos.slice(0, 4);
 
-  function handleSelectImg(e) {
-    setSaveImg(e.target.src);
+  function handleSelectImg(id) {
+    data_UNSPLASH_IMG.photos.map((data) => {
+      if (data.id === id) {
+        return setSaveImg(data);
+      }
+    });
   }
 
   function parrentClick(e) {
     openModal();
     e.preventDefault();
-
   }
   function child(e) {
     e.stopPropagation();
@@ -28,9 +41,9 @@ function Add_task({ openModal }) {
 
   const handleTypeInput = (e) => {
     if (e.target.value.length === 0) {
-      setBtnToggle(true)
+      setBtnToggle(true);
     } else {
-      setBtnToggle(false)
+      setBtnToggle(false);
     }
   };
 
@@ -38,22 +51,26 @@ function Add_task({ openModal }) {
     e.preventDefault();
 
     dispatch(
-      setTaskValue({
-        nameTask: e.target[0].value,
-        typeTask: e.target[1].value,
-        img: saveImg,
-      }),
+      setTaskValue([
+        ...dataTask,
+        {
+          id: uniqid(),
+          img: saveImg || data_UNSPLASH_IMG.photos[0],
+          nameTask: e.target[0].value,
+          typeTask: e.target[1].value,
+        },
+      ]),
     );
-    // console.log(e.target[1].value);
     e.target[0].value = "";
   };
-
-  const dataUnsplashImg = data_UNSPLASH_IMG?.photos.slice(0, 4);
 
   return (
     <div>
       {toggle ? (
         <DesignModal
+          loading={loading}
+          setQueryPage={setQueryPage}
+          setSearchPhoto={setSearchPhoto}
           setToggle={setToggle}
           setSaveImg={setSaveImg}
         />
@@ -71,7 +88,10 @@ function Add_task({ openModal }) {
             <div className={style.image}>
               <img
                 className={style.img}
-                src={saveImg || data_UNSPLASH_IMG.photos[0].urls.small}
+                src={
+                  saveImg?.urls?.small ||
+                  data_UNSPLASH_IMG?.photos[0]?.urls?.small
+                }
                 alt=""
               />
             </div>
@@ -86,7 +106,11 @@ function Add_task({ openModal }) {
             <p>Фон</p>
             <div className={style.bg_wrapper}>
               {dataUnsplashImg.map((data) => (
-                <div key={data.id} className="bg_1" onClick={handleSelectImg}>
+                <div
+                  key={data.id}
+                  className="bg_1"
+                  onClick={() => handleSelectImg(data.id)}
+                >
                   <img src={data.urls.small} id={data.id} />
                   <i className="fas-fa succes"></i>
                 </div>
@@ -139,6 +163,7 @@ function Add_task({ openModal }) {
               <div className={style.board}>
                 <span>Заголовок доски *</span>
                 <input
+                  autoFocus
                   onChange={handleTypeInput}
                   type="text"
                   defaultValue={""}
@@ -148,9 +173,7 @@ function Add_task({ openModal }) {
               <div className={style.select_view}>
                 <label htmlFor="">Видимость</label>
                 <select defaultValue={"private"} id="type">
-                  <option  value="private" >
-                    Приватная
-                  </option>
+                  <option value="private">Приватная</option>
                   <option value="workingSpace">Рабочее пространство</option>
                   <option value="Public">Публичная</option>
                 </select>
@@ -159,6 +182,7 @@ function Add_task({ openModal }) {
                 <button
                   disabled={btnToggle ? true : false}
                   className={style.create}
+                  onClick={() => setToggleFunc(false)}
                 >
                   Создать
                 </button>

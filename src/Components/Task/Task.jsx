@@ -1,12 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
 import style from "./Task.module.scss";
 import { Walpeper, Account } from "../../Assets/index";
 import New_task from "./New_Task/New_task";
+import { useDispatch, useSelector } from "react-redux";
+import { setTaskValue } from "../../Context/store/TaskAddValue/TaskAddValueSlice";
 
 function Task() {
+  const dataTask = useSelector((state) => state.data.value);
+  const newTaskAddDispatch = useDispatch(null);
+  const newTasks = dataTask[dataTask.length - 1];
+  const [btnActive, setBtnActive] = useState(false);
+  const [newTask, setNewTask] = useState([]);
+
+  console.log(newTask);
+
+  // Task add new value
+  const handleTaskSubmit = (e) => {
+    setNewTask([{ tasks: e.target[0].value }]);
+    e.preventDefault();
+    newTaskAddDispatch(
+      setTaskValue([
+        {
+          id: newTasks.id,
+          img: newTasks.img,
+          nameTask: newTasks.nameTask,
+          typeTask: newTasks.typeTask,
+          taskAdd: newTask
+        },
+      ]),
+    );
+  };
+
+  console.log(dataTask);
+
+
+``
+  const btnActiveXmark = (e) => {
+    e.stopPropagation();
+  };
+
+  const handleTaskAddActive = () => {
+    setBtnActive(true);
+  };
+
   return (
     <div className={style.task}>
-      <div className={style.bg} style={{ backgroundImage: `url(${Walpeper})` }}>
+      <div
+        className={style.bg}
+        style={{ backgroundImage: `url(${newTasks?.img?.urls?.full})` }}
+      >
         <div className={style.task_item}>
           <div className={style.task_board}>
             <div className={style.board}>
@@ -77,23 +119,28 @@ function Task() {
                   <i className="fa-solid fa-plus"></i>
                 </div>
               </div>
-              <div className={style.my_board_edit}>
-                <div className={style.editon}>
-                  <img src={Walpeper} alt="1" />
-                  <span>My board</span>
+              {dataTask.map((data) => (
+                <div key={data.id} className={style.my_board_edit}>
+                  <div className={style.editon}>
+                    <img src={data?.img?.urls?.thumb} alt="1" />
+                    <span>{data.nameTask}</span>
+                  </div>
+                  <div className={style.icon}>
+                    <i className="fa-solid fa-ellipsis"></i>
+                    <i className="fa-solid fa-star"></i>
+                  </div>
                 </div>
-                <div className={style.icon}>
-                  <i className="fa-solid fa-ellipsis"></i>
-                  <i className="fa-solid fa-star"></i>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
         <div className={style.edit_task}>
-          <div className={style.nav}>
+          <div
+            className={style.nav}
+            style={{ backgroundColor: `${newTasks?.img?.color}60` }}
+          >
             <div className={style.nav_left}>
-              <p>My board</p>
+              <p>{newTasks?.nameTask}</p>
 
               <div className={style.btn}>
                 <button>
@@ -138,7 +185,39 @@ function Task() {
           </div>
 
           <div className={style.tasks}>
-            <New_task />
+            {dataTask[0]?.taskAdd?.tasks ? (
+              newTask?.map((desc) => (
+                <New_task  />
+              ))
+            ) : (
+              <div style={{ display: "flex" }} onClick={btnActiveXmark}>
+                {btnActive ? (
+                  <div className={style.add_newTask} onClick={btnActiveXmark}>
+                    <form onSubmit={handleTaskSubmit}>
+                      <input
+                        // onChange={handleInputValue}
+                        type="text"
+                        placeholder="Ввести заголовок списка"
+                        autoFocus
+                      />
+                      <div className={style.btn_icons}>
+                        <button>Добавить список</button>
+                        <i
+                          onClick={() => setBtnActive(false)}
+                          className="fa-solid fa-xmark"
+                        ></i>
+                      </div>
+                    </form>
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
+            )}
+            <div onClick={handleTaskAddActive} className={style.add_btn}>
+              <i className="fa-solid fa-plus"></i>
+              <span>Добавьте еще одну колонку</span>
+            </div>
           </div>
         </div>
       </div>

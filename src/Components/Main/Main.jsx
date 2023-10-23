@@ -1,13 +1,21 @@
 import React from "react";
 import style from "./Main.module.scss";
 import { Walpeper } from "../../Assets";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import Task from "../Task/Task";
 
-function Main({ openModal }) {
-  // toggle add btn
+function Main({ openModal, setToggleFunc }) {
+  const dataTasks = useSelector((state) => state.data.value);
 
+  const handleOpenTask = (id) => {
+    dataTasks.map((data) => {
+      if (data.id === id) {
+        return setToggleFunc(false);
+      }
+    });
+  };
 
-    return (
+  return (
     <main className="container">
       <div className={style.content}>
         <div className={style.menu}>
@@ -48,15 +56,25 @@ function Main({ openModal }) {
             <i className="fa-regular fa-clock"></i>
             <span>Недавно просмотренное</span>
           </div>
-          <div className={style.viewed}>
-            <div className={style.recent_img}>
-              <img src={Walpeper} alt="walpaper" />
+          {dataTasks.map((data, index) => (
+            <div
+              key={index}
+              className={style.viewed}
+              onClick={() => handleOpenTask(data.id)}
+            >
+              <div className={style.recent_img}>
+                <img
+                  className={style.image}
+                  src={data?.img.urls?.small}
+                  alt="walpaper"
+                />
+              </div>
+              <div className={style.recently_viewd}>
+                <p className={style.title}>{data.nameTask}</p>
+                <p className={style.desc}>Aziz: рабочее пространство</p>
+              </div>
             </div>
-            <div className={style.recently_viewd}>
-              <p className={style.title}>1-on-1 Meeting Agenda</p>
-              <p className={style.desc}>Aziz: рабочее пространство</p>
-            </div>
-          </div>
+          ))}
           <div className={style.create_task}>
             <p className={style.task_url}>Ссылки</p>
             <div className={style.create} onClick={openModal}>

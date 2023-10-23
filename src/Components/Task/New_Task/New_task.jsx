@@ -1,21 +1,14 @@
 import React, { useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import style from "./newTask.module.scss";
 
 function New_task() {
-  const [textareaValue, setTextareaValue] = useState("");
   const textareaRef = useRef(null);
   const textHight = useRef(null);
+  const taskData = useSelector((state) => state.data.value);
   const [dynamicHover, setDynamicHover] = useState(false);
-
-  const [tasks, setTasks] = useState([
-    {
-      title: "Titlar",
-      id: 1,
-    },
-    { id: 2, title: "Tasklar uchun" },
-    { id: 4, title: "avvalgi Tasklar uchun" },
-    { id: 3, title: "Mening taskim" },
-  ]);
+  const [tasks, setTasks] = useState([{ title: "Aziz" }]);
+  const [inputActive, setInputActive] = useState(false);
 
   function handleInput() {
     const textArea = textareaRef.current.scrollHeight;
@@ -23,9 +16,7 @@ function New_task() {
   }
 
   function handleChange(e) {
-    setTextareaValue(e.target.value);
     dynamicHight();
-
     handleInput(e);
   }
 
@@ -44,15 +35,15 @@ function New_task() {
       }
     });
   }
-  // console.log(hoverIcon(1));
-  // console.log(dynamicHover);
 
   function dynamicHight() {
     const textArea = textHight.current.scrollHeight;
     textHight.current.style.height = textArea + "px";
 
     if (textHight.current.style.height === 60 + "vh") {
-      console.log("bora");
+      console.log("bor");
+    } else {
+      console.log("yoq");
     }
   }
 
@@ -61,10 +52,10 @@ function New_task() {
       <div className={style.container} ref={textHight}>
         <div className={style.list_title}>
           <textarea
-            value={"SAlom"}
             ref={textareaRef}
             onChange={handleChange}
             rows="1"
+            value={'1'}
           />
           <div className={style.menu}>
             <i className="fa-solid fa-ellipsis"></i>
@@ -77,12 +68,12 @@ function New_task() {
               <textarea
                 // readOnly
                 ref={textareaRef}
-                onChange={handleChange}
+                // onChange={handleChange}
                 cols="30"
                 rows="1"
                 onMouseEnter={() => hovers(task.id, true)}
                 onMouseLeave={() => hovers(task.id, false)}
-                // value={task.title}
+                value={task.title}
               ></textarea>
               {dynamicHover ? <i className="fa-solid fa-pen"></i> : ""}
             </div>

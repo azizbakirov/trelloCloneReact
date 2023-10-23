@@ -7,7 +7,7 @@ export const TaskAddValueSlice = createSlice({
   },
   reducers: {
     setTaskValue: (state, action) => {
-      state.value = action.payload;
+     state.value = action.payload;
     },
   },
 });

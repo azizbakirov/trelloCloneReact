@@ -1,12 +1,13 @@
 .list {
-  width: 272px;
+  width: 280px;
   background-color: #101204;
   border-radius: 12px;
-  height: 100%;
+  padding: 2px 0;
+
 
   .container {
-    width: 90%;
-    margin: 10px auto;
+    width: 94%;
+    margin: 8px auto;
 
 
     .list_title {
@@ -14,11 +15,13 @@
       height: auto;
       display: flex;
       gap: 8px;
-      margin-bottom: 10px;
+      margin-bottom: 2px;
 
       textarea {
-        padding: 5px;
+        padding: 7px 11px;
         background-color: transparent;
+        // cursor: pointer;
+        cursor:text;  
         overflow: none;
         width: 100%;
         resize: none;
@@ -47,29 +50,30 @@
 
     .text {
       position: relative;
-      overflow: scroll;
       overflow-x: hidden;
       // margin-top: 18px;
         // height: 60vh;
         height: auto;
 
-      padding: 0 6px 0 0;
       
       .task_item {
         display: flex;
+        align-items: center;
         margin-top: 10px;
         // height: 100%;
+        cursor: pointer;
+        width: 100%;
         
         textarea{
           width: 100%;
           cursor: pointer;
-          padding: 10px 8px;
+          padding: 11px 13px;
           resize: none;
           outline: none;
           background-color: #22272b;
           border: none;
           color: #b6c2cf;
-          border-radius: 5px; 
+          border-radius: 8px; 
           
         }
         
@@ -81,7 +85,7 @@
           margin-top: 5px;
           font-size: 14px;
           border-radius: 5px;
-          left: 200px;
+          right: 0px;
           background-color: #2c332dad;
         }
       }
@@ -90,6 +94,7 @@
       display: flex;
       // justify-content: space-between;
       align-items: center;
+      gap: 8px;
       justify-content: center;
 
       button {
@@ -109,7 +114,8 @@
         align-items: center;
       }
       .template {
-        padding: 9px 11px;
+          padding: 8px 10px;
+
       }
       button:hover {
         background-color: #222b24;

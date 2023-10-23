@@ -7,7 +7,7 @@ function GradientColor({setSearchPhotos}) {
       <div className={style.title_close}>
         <div>
           <i
-            onClick={() => setSearchPhotos(true)}
+            onClick={() => setSearchPhotos('')}
             className="fa-solid fa-arrow-left"
           ></i>
         </div>

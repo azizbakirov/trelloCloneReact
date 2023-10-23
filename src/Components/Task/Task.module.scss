@@ -6,6 +6,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+    background-position: center;
     display: flex;
 
     .task_item {
@@ -155,7 +156,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #3c4247;
+            // background-color: #3c4247;
             padding: 5px 18px;
             cursor: pointer;
 
@@ -192,7 +193,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: #1d212556;
+        background-color: #1d212548;
         backdrop-filter: blur(3px);
         padding: 6px 10px;
         color: white;
@@ -253,8 +254,6 @@
             align-items: center;
             gap: 8px;
 
-
-
             .account {
               border-radius: 50%;
               padding: 7px;
@@ -272,23 +271,20 @@
               background-color: #a1bdd914;
             }
 
-          
-            .btn_send{
+            .btn_send {
               background-color: #ffffffd5;
-              color:#1d2125;
+              color: #1d2125;
               display: flex;
               align-items: center;
               font-weight: 600;
               gap: 5px;
             }
-            .btn_send:hover{
+            .btn_send:hover {
               background-color: white;
             }
-            .menu{
+            .menu {
               font-size: 15px;
             }
-
-
           }
         }
 
@@ -300,7 +296,7 @@
           padding: 7px 11px;
           cursor: pointer;
         }
-        .filter_btn{
+        .filter_btn {
           display: flex;
           align-items: center;
           gap: 5px;
@@ -310,10 +306,85 @@
           backdrop-filter: blur(5px);
         }
       }
-      .tasks{
+      .tasks {
         display: flex;
-        align-items: center;
+        gap: 12px;
         padding: 10px 15px;
+        // vertical-align: top;
+        // width: 100%;
+        // height: 100%;
+
+        .add_btn {
+          width: 272px;
+          height: 50px;
+          justify-content: center;
+          border: none;
+          background-color: #929292a1;
+          padding: 12px 8px;
+          border-radius: 12px;
+          color: white;
+          font-size: 14px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+
+         
+        }
+        .add_newTask {
+          background-color: #101204;
+          width: 272px;
+          border-radius: 12px;
+          padding: 12px 8px;
+
+          input {
+            width: 100%;
+            background-color: #22272b;
+            font-weight: 600;
+            height: 32px;
+            padding: 8px 12px;
+            // border: 2px solid #85b8ff;
+            border: none;
+            outline: none;
+            box-shadow: inset 0 0 0 2px #85b8ff;
+            border-radius: 3px;
+            color: #d9e9ff;
+          }
+          input::placeholder {
+            color: #d9e9ff65;
+            font-weight: 400;
+          }
+          input:focus {
+            border: none;
+          }
+          .btn_icons {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            button {
+              margin-top: 8px;
+              background-color: #579dff;
+              color: #1d2125;
+              border-radius: 5px;
+              border: none;
+              padding: 6px 12px;
+              font-weight: 600;
+              font-size: 14px;
+              text-align: center;
+              cursor: pointer;
+            }
+            i {
+              // margin-left: 12px;
+              margin-top: 3px;
+              font-size: 27px;
+              color: #d9e9fff1;
+              cursor: pointer;
+            }
+          }
+        }
+        .add_btn:hover {
+          background-color: #6666669c;
+        }
       }
     }
   }

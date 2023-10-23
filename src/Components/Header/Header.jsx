@@ -2,12 +2,13 @@ import React from 'react'
 import style from "./Header.module.scss"
 import Navbar from './Navbar/Navbar'
 
-function Header() {
+
+function Header({ setToggleFunc, setPageModal }) {
   return (
-    <header >
-      <Navbar />
+    <header>
+      <Navbar setToggleFunc={setToggleFunc} setPageModal={setPageModal} />
     </header>
-  )
+  );
 }
 
 export default Header

@@ -1,7 +1,6 @@
 .searchModal {
   height: 100%;
 
-
   .title_close {
     display: flex;
     justify-content: space-between;
@@ -11,7 +10,7 @@
       font-size: 14px;
       font-weight: 600;
 
-      a{
+      a {
         text-decoration: none;
         color: #579dff;
       }
@@ -27,13 +26,13 @@
     }
   }
   .bgWalpaper {
+    height: calc(100% - 35px);
     .title {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 8px;
       margin-top: 10px;
-      height: 70%;
 
       button {
         padding: 7px 12px;
@@ -49,7 +48,7 @@
         background-color: #424b52;
       }
 
-       .search {
+      .search {
         background-color: #272c31;
         border: 1px solid #a1bdd92c;
         padding: 3px 10px;
@@ -80,12 +79,15 @@
       justify-content: space-between;
       overflow: scroll;
       overflow-x: hidden;
-      height: 70%;
+      height: calc(100% - 43px);
+      align-items: center;
       .grid_img {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         row-gap: 5px;
         column-gap: 8px;
+
+       
 
         img {
           gap: 24px;
