@@ -3,10 +3,15 @@ import style from "./Header.module.scss"
 import Navbar from './Navbar/Navbar'
 
 
-function Header({ setToggleFunc, setPageModal }) {
+function Header({setOpenTaskModal, setToggleFunc, setPageModal, openModal }) {
   return (
     <header>
-      <Navbar setToggleFunc={setToggleFunc} setPageModal={setPageModal} />
+      <Navbar
+        setOpenTaskModal={setOpenTaskModal}
+        setToggleFunc={setToggleFunc}
+        openModal={openModal}
+        setPageModal={setPageModal}
+      />
     </header>
   );
 }

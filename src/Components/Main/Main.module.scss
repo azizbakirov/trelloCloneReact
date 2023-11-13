@@ -1,5 +1,5 @@
 .content {
-  margin: 55px auto;
+  margin: 55px 0;
   justify-content: center;
   display: flex;
   gap: 50px;
@@ -29,6 +29,7 @@
     }
 
     .task_template {
+      flex-direction: column;
       .task_template_add {
         display: flex;
         align-items: center;
@@ -92,96 +93,10 @@
       }
     }
   }
-  .news{
+
+  .wrapper_tasks{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 50px;
-    width: 400px;
-    height: 200px;
-    border-radius: 8px;
-    border: 1px solid rgba(0, 0, 0, 0.13);
-    border-bottom: 3px solid rgba(0, 0, 0, 0.459);
-    // background-color: #092957;
-  }
-  .recently {
-    .recent {
-      display: flex;
-      gap: 15px;
-      font-size: 12px;
-      align-items: center;
-      font-weight: 600;
-      margin-left: 11px;
-
-      margin-bottom: 15px;
-    }
-    .viewed {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      // margin-top: 20px;
-      padding: 10px;
-      border-radius: 5px;
-      width: 330px;
-      transition: all 0.3s;
-      cursor: pointer;
-
-      .recent_img {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        
-        .image {
-          background-color: red;
-          width: 30px;
-          height: 30px;
-          border-radius: 5px;
-          object-fit: cover;
-        }
-      }
-      .recently_viewd {
-        .title {
-          font-size: 14px;
-          font-weight: bold;
-        }
-        .desc {
-          font-size: 12px;
-        }
-      }
-    }
-    .viewed:hover {
-      background-color: #a1bdd914;
-    }
-  }
-  .create_task {
-    font-weight: 400;
-    font-size: 14px;
-    width: 330px;
-
-    .create {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 20px;
-      padding: 10px;
-      border-radius: 5px;
-      transition: all 0.3s;
-      cursor: pointer;
-
-      .task_icon {
-        padding: 5px 9px;
-        border-radius: 5px;
-        background-color: #a1bdd914;
-      }
-    }
-    .create:hover {
-      background-color: #a1bdd914;
-    }
-
-    .task_url {
-      margin: 55px 0px 12px 9px;
-      font-size: 12px;
-      font-weight: 600;
-    }
+    gap: 60px;
+    // width: 60%;
   }
 }

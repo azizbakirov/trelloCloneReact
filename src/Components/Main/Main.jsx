@@ -1,33 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
 import style from "./Main.module.scss";
 import { Walpeper } from "../../Assets";
 import { useDispatch, useSelector } from "react-redux";
 import Task from "../Task/Task";
+import Team from "./HomeTeamTab/Team";
+import CreateTaskItem from "./Home/Home";
+import Home from "./Home/Home";
+import Board from "./Boards/Board";
 
-function Main({ openModal, setToggleFunc }) {
-  const dataTasks = useSelector((state) => state.data.value);
+function Main({openTaskModal, setOpenTaskModal, openModal, setToggleFunc }) {
+  const dataTasks = useSelector((state) => state.data.value); //data state value inputs
+  const [createBtn, setCreateBtn] = useState(false);
+  const [activeBtn, setActiveBtn] = useState("homePage");
 
   const handleOpenTask = (id) => {
     dataTasks.map((data) => {
       if (data.id === id) {
-        return setToggleFunc(false);
+        return setToggleFunc(data);
       }
     });
   };
 
   return (
-    <main className="container">
+    <main className="container_content">
       <div className={style.content}>
         <div className={style.menu}>
-          <div className={style.btn}>
+          <div
+            className={`${style.btn} ${
+              activeBtn === "boards" ? style.btn_active : ""
+            }`}
+            onClick={() => setActiveBtn("boards")}
+          >
             <i className="fa-brands fa-trello"></i>
             <span>Доски</span>
           </div>
-          <div className={style.btn}>
+          <div
+            className={`${style.btn} ${
+              activeBtn === "templates" ? style.btn_active : ""
+            }`}
+            onClick={() => setActiveBtn("templates")}
+          >
             <i className="fa-brands fa-trello"></i>
             <span>Шаблоны</span>
           </div>
-          <div className={`${style.btn} ${style.btn_active}`}>
+          <div
+            className={`${style.btn} ${
+              activeBtn === "homePage" ? style.btn_active : ""
+            }`}
+            onClick={() => setActiveBtn("homePage")}
+          >
             <i className="fa-solid fa-explosion"></i>
             <span>Главная страница</span>
           </div>
@@ -37,53 +58,34 @@ function Main({ openModal, setToggleFunc }) {
           <div className={style.task_template}>
             <div className={style.task_template_add}>
               <p>Рабочие пространства</p>
-              <i className="fa-solid fa-plus"></i>
+              <i
+                className="fa-solid fa-plus"
+                onClick={() => setOpenTaskModal("newTask")}
+              ></i>
             </div>
-            <div className={style.template}>
+            <div
+              className={style.template}
+              onClick={() => setCreateBtn(!createBtn)}
+            >
               <div className={style.letter_wrapp}>
                 <div className={style.letter}>A</div>
                 <p>Aziz: рабочее пространство</p>
               </div>
-              <i className="fa-solid fa-chevron-down"></i>
+              <i
+                className={`fa-solid ${
+                  createBtn ? "fa-chevron-up" : "fa-chevron-down"
+                }`}
+              ></i>
             </div>
+            {createBtn ? <Team /> : ""}
           </div>
         </div>
 
-        <div className={style.news}>Not Found</div>
-
-        <div className={style.recently}>
-          <div className={style.recent}>
-            <i className="fa-regular fa-clock"></i>
-            <span>Недавно просмотренное</span>
-          </div>
-          {dataTasks.map((data, index) => (
-            <div
-              key={index}
-              className={style.viewed}
-              onClick={() => handleOpenTask(data.id)}
-            >
-              <div className={style.recent_img}>
-                <img
-                  className={style.image}
-                  src={data?.img.urls?.small}
-                  alt="walpaper"
-                />
-              </div>
-              <div className={style.recently_viewd}>
-                <p className={style.title}>{data.nameTask}</p>
-                <p className={style.desc}>Aziz: рабочее пространство</p>
-              </div>
-            </div>
-          ))}
-          <div className={style.create_task}>
-            <p className={style.task_url}>Ссылки</p>
-            <div className={style.create} onClick={openModal}>
-              <p className={style.task_icon}>
-                <i className="fa-regular fa-plus"></i>
-              </p>
-              <p>Создать доску</p>
-            </div>
-          </div>
+        <div className={style.wrapper_tasks}>
+          {activeBtn === "homePage" && (
+            <Home dataTasks={dataTasks} openModal={openModal} />
+          )}
+          {activeBtn === "boards" && <Board openModal={openModal} />}
         </div>
       </div>
     </main>

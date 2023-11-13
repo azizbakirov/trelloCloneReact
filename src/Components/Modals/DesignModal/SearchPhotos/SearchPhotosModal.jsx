@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { useSelector } from "react-redux";
 import style from "./SearchPhotosModal.module.scss";
-import { MiniLoading } from "../../Loading";
+import {MiniLoading} from "../../../../Assets"
 
 function SearchPhotosModal({
   loading,
@@ -11,6 +11,7 @@ function SearchPhotosModal({
   setSaveImg,
   handleSelectImg,
   setSearchPhotos,
+            notSearchPhoto
 }) {
   const scrollWalpaper = useRef(null);
   const data_unsplashImg = useSelector((state) => state.api.value);
@@ -59,25 +60,29 @@ function SearchPhotosModal({
             </form>
           </div>
         </div>
-        <div
-          className={style.bg_wrapper}
-          ref={scrollWalpaper}
-          onScroll={handleScroll}
-        >
-          {loading ? (
-            <div className={style.loading}>
-              <MiniLoading />
-            </div>
-          ) : (
-            <div className={style.grid_img}>
-              {data_unsplashImg.photos.map((data) => (
-                <div key={data.id} onClick={() => handleSelectImg(data.id)}>
-                  <img src={data.urls.small} alt="" />
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+        {notSearchPhoto ? (
+          <div
+            className={style.bg_wrapper}
+            ref={scrollWalpaper}
+            onScroll={handleScroll}
+          >
+            {loading ? (
+              <div className={style.loading}>
+                <MiniLoading />
+              </div>
+            ) : (
+              <div className={style.grid_img}>
+                {data_unsplashImg.photos.map((data) => (
+                  <div key={data.id} onClick={() => handleSelectImg(data.id)}>
+                    <img src={data.urls.small} alt="" />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        ) : (
+          <p>Такой картинки не существует</p>
+        )}
       </div>
     </div>
   );

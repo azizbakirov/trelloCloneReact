@@ -5,23 +5,29 @@ import DesignModal from "../DesignModal/DesignModal";
 import { useDispatch, useSelector } from "react-redux";
 import { setTaskValue } from "../../../Context/store/TaskAddValue/TaskAddValueSlice";
 import uniqid from "uniqid";
+import { bgGradient } from "../../../Constants/GradientColor/GradientColor";
 
 function Add_task({
+  notSearchPhoto,
   loading,
   setQueryPage,
   openModal,
   handleSelectImg,
   setToggleFunc,
+  
   setSearchPhoto,
 }) {
   const data_UNSPLASH_IMG = useSelector((state) => state.api.value);
   const dataTask = useSelector((state) => state.data.value);
+  const [saveGradientColor, setSaveGradientColor] = useState(null);
   const [toggle, setToggle] = useState(false);
   const [btnToggle, setBtnToggle] = useState(true);
-  const [saveImg, setSaveImg] = useState(null);
-  const dispatch = useDispatch();
-
-  const dataUnsplashImg = data_UNSPLASH_IMG?.photos.slice(0, 4);
+  const [saveImg, setSaveImg] = useState(
+    data_UNSPLASH_IMG.photos[0],
+    );
+    const dispatch = useDispatch();
+    const dataUnsplashImg = data_UNSPLASH_IMG?.photos.slice(0, 4);
+  
 
   function handleSelectImg(id) {
     data_UNSPLASH_IMG.photos.map((data) => {
@@ -55,7 +61,7 @@ function Add_task({
         ...dataTask,
         {
           id: uniqid(),
-          img: saveImg || data_UNSPLASH_IMG.photos[0],
+          img: saveImg,
           nameTask: e.target[0].value,
           typeTask: e.target[1].value,
         },
@@ -64,15 +70,22 @@ function Add_task({
     e.target[0].value = "";
   };
 
+  const handleColorPicer = (e) => {
+    setSaveImg(e.target.style.background);
+  };
+
+
   return (
     <div>
       {toggle ? (
         <DesignModal
+        handleColorPicer={handleColorPicer}
           loading={loading}
           setQueryPage={setQueryPage}
           setSearchPhoto={setSearchPhoto}
           setToggle={setToggle}
           setSaveImg={setSaveImg}
+          notSearchPhoto={notSearchPhoto}
         />
       ) : (
         ""
@@ -86,14 +99,26 @@ function Add_task({
           </div>
           <div className={style.info}>
             <div className={style.image}>
-              <img
-                className={style.img}
-                src={
-                  saveImg?.urls?.small ||
-                  data_UNSPLASH_IMG?.photos[0]?.urls?.small
-                }
-                alt=""
-              />
+            
+
+              {saveImg?.urls ? (
+                <img
+                  src={
+                    saveImg?.urls?.small ||
+                    data_UNSPLASH_IMG.photos[0].urls.small
+                  }
+                  alt=""
+                  className={style.img}
+                />
+              ) : (
+                <div
+                  className={style.img}
+                  style={{
+                    background: "rgb(87,157,255)",
+                    background: saveImg,
+                  }}
+                ></div>
+              )}
             </div>
             <div className={style.grid}>
               <div>
@@ -117,42 +142,19 @@ function Add_task({
               ))}
             </div>
             <div className={style.bg_color}>
-              <div
-                style={{
-                  background: "rgb(87,157,255)",
-                  background:
-                    "linear-gradient(90deg, rgba(87,157,255,1) 0%, rgba(150,237,255,1) 100%)",
-                }}
-              ></div>
-              <div
-                style={{
-                  background: "rgb(87,157,255)",
-                  background:
-                    "linear-gradient(90deg, rgba(255,140,226,1) 0%, rgba(194,8,47,1) 100%)",
-                }}
-              ></div>
-              <div
-                style={{
-                  background: "rgb(87,157,255)",
-                  background:
-                    "linear-gradient(90deg, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%)",
-                }}
-              ></div>
-              <div
-                style={{
-                  background: "rgb(87,157,255)",
-                  background:
-                    "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(252,176,69,1) 100%)",
-                }}
-              ></div>
-              <div
-                style={{
-                  background: "rgb(87,157,255)",
-                  background:
-                    "linear-gradient(0deg, rgba(135,178,255,1) 0%, rgba(255,71,71,1) 100%)",
-                }}
-              ></div>
-
+              {bgGradient.map((gradients) => (
+                <>
+                  <div
+                  key={gradients}
+                    onClick={handleColorPicer}
+                    id={uniqid}
+                    style={{
+                      background: "rgb(87,157,255)",
+                      background: gradients.background,
+                    }}
+                  ></div>
+                </>
+              ))}
               <div className={style.bg_all} onClick={() => setToggle(!toggle)}>
                 <i className="fa-solid fa-ellipsis"></i>
               </div>
@@ -168,7 +170,7 @@ function Add_task({
                   type="text"
                   defaultValue={""}
                 />
-                <span>👋 Укажите название доски.</span>
+                {btnToggle ? <span>👋 Укажите название доски.</span> : ""}
               </div>
               <div className={style.select_view}>
                 <label htmlFor="">Видимость</label>

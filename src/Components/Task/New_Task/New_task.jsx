@@ -7,7 +7,7 @@ function New_task() {
   const textHight = useRef(null);
   const taskData = useSelector((state) => state.data.value);
   const [dynamicHover, setDynamicHover] = useState(false);
-  const [tasks, setTasks] = useState([{ title: "Aziz" }]);
+  const [tasks, setTasks] = useState([]);
   const [inputActive, setInputActive] = useState(false);
 
   function handleInput() {

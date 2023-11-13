@@ -1,0 +1,121 @@
+ .news {
+
+     h2 {
+         font-size: 16px;
+         font-weight: 700;
+         color: #9fadbc;
+     }
+
+     .container {
+         display: flex;
+         align-items: center;
+         gap: 8px;
+
+         margin-top: 2rem;
+
+         .template {
+             margin-right: 7rem;
+
+             .letter_wrapp {
+                 display: flex;
+                 align-items: center;
+                 gap: 10px;
+
+                 .letter {
+                     padding: 7px 13px;
+                     background: rgb(87, 157, 255);
+                     background: linear-gradient(150deg,
+                             rgba(87, 157, 255, 1) 0%,
+                             rgba(150, 237, 255, 1) 100%);
+                     color: #1d2125;
+                     font-weight: bold;
+                     font-size: 16px;
+                     border-radius: 4px;
+                 }
+
+                 p {
+                     font-size: 16px;
+                     font-weight: 700;
+                     //  width: 50%;
+                 }
+             }
+
+             i {
+                 font-size: 14px;
+                 padding: 5px;
+             }
+         }
+
+         button {
+             border-radius: 3px;
+             padding: 7px 12px;
+             background-color: #a1bdd914;
+             border: none;
+             color: #b6c2cf;
+             font-weight: 400;
+             cursor: pointer;
+
+             i {
+                 margin-right: 6px;
+             }
+         }
+
+         button:hover {
+             background-color: #a1bdd93f;
+         }
+
+         .btns {
+             background-color: #2b273f;
+             padding: 4.5px 12px 4.5px 8px;
+
+             i {
+                 background-color: #9f8fef;
+                 color: #2b273f;
+                 padding: 5px;
+                 font-size: 12px;
+                 border-radius: 3px;
+             }
+         }
+
+
+     }
+
+     .create_task {
+         margin: 25px 0;
+
+         button {
+             width: 193px;
+             height: 100px;
+             color: #b6c2cf;
+             border: none;
+             background-color: #a1bdd914;
+             padding: 8px;
+             border-radius: 5px;
+             cursor: pointer;
+         }
+
+         button:hover {
+             background-color: #a1bdd93f;
+         }
+     }
+
+     .view_closed_boards {
+         margin: 25px 0;
+
+         button {
+             //  width: 193px;
+             color: #b6c2cf;
+             border: none;
+             background-color: #a1bdd914;
+             padding: 8px 12px;
+             border-radius: 5px;
+             font-weight: 500;
+             font-size: 14px;
+             cursor: pointer;
+         }
+
+         button:hover {
+             background-color: #a1bdd93f;
+         }
+     }
+ }

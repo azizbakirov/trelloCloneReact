@@ -7,8 +7,9 @@ import { store } from "./Context/store/index.js";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    {/* <Favicon url={Walpeper} /> */}
     <Provider store={store}>
-      <App />
+        <App />
     </Provider>
   </React.StrictMode>,
 );
